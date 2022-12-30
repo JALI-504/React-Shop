@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
     <>
     <ProvideAuth>
       <MainLayout>
-        <Component {...pageProps} />;
+        <Component {...pageProps} /> 🎶✨
       </MainLayout>
     </ProvideAuth>
     </>
