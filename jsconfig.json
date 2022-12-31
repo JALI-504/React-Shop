@@ -20,7 +20,9 @@
             "@services/*": [
                 "services/*",
             ],
+            "@services/*": [
+                "services/*",
+            ],
         }
     }
-
 }
