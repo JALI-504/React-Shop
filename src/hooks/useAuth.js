@@ -3,15 +3,15 @@ import Cookie from 'js-cookie';
 import axios from 'axios';
 import endPoints from '@services/api/';
 
-const authContext = createContext();
+const AuthContext = createContext();
 
 export function ProvideAuth({ children }) {
   const auth = useProvideAuth();
-  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
+  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 }
 
 export const useAuth = () => {
-  return useContext(authContext);
+  return useContext(AuthContext);
 };
 
 function useProvideAuth() {
@@ -25,17 +25,28 @@ function useProvideAuth() {
       },
     };
     const { data: access_token } = await axios.post(endPoints.auth.login, { email, password }, options);
-    if(access_token) {
-      const token = access_token.access_token; 
-      Cookie.set('token', token, {expires: 5});
+    if (access_token) {
+      const token = access_token.access_token;
+      Cookie.set('token', token, { expires: 5 });
       axios.defaults.headers.Authorization = `Bearer ${token}`;
       const { data: user } = await axios.get(endPoints.auth.profile);
       setUser(user);
     }
   };
 
+
+
+
+  const logout = () => {
+    Cookie.remove('token');
+    setUser(null);
+    delete axios.defaults.headers.Authorization;
+    window.location.href = '/login';
+  };
+
   return {
     user,
     signIn,
+    logout,
   };
 }

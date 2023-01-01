@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { CheckIcon, XCircleIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 import Modal from '@common/Modal';
 import FormProduct from '@components/FormProduct';
 import axios from 'axios';
@@ -25,11 +26,11 @@ export default function Products() {
     }
   }, [alert]);
 
-  const handleDelete = async (id) => {
+  const handleDelete = (id) => {
     deleteProduct(id).then(() => {
       setAlert({
         active: true,
-        message: 'Product deleted successfully',
+        message: 'Delete product successfully',
         type: 'error',
         autoClose: true,
       });
@@ -105,12 +106,12 @@ export default function Products() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.id}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="/edit" className="text-indigo-600 hover:text-indigo-900">
+                        <Link href={`/dashboard/edit/${product.id}`} className="text-indigo-600 hover:text-indigo-900">
                           Edit
-                        </a>
+                        </Link>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <XCircleIcon className="flex-shrink-0 h-6 w-6 text-gray-400 cursor-pointer" aria-hidden="true" onClick={() => handleDelete(product.id)} />{' '}
+                        <XCircleIcon className="flex-shrink-0 h-6 w-6 text-gray-400 cursor-pointer" aria-hidden="true" onClick={() => handleDelete(product.id)} />
                       </td>
                     </tr>
                   ))}
