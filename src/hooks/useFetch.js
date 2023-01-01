@@ -1,25 +1,23 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import endPoints from "@services/api";
+import { useState, useEffect } from 'react'; //Se importa desde react
+import axios from 'axios'; //Con axios vamos a realizar las peticiones
 
-const useFetch = (endPoints) => {
-        const [data, setData] = useState([]);
+const useFetch = (endpoint) => {
+  const [data, setData] = useState([]); //Array vacío
 
-        async function fetchData() {
-            const response = await axios.get(endPoints);
-            setData(response.data);
-        }
+  async function fetchData() {
+    const response = await axios.get(endpoint); //Llamado
+    setData(response.data);
+  }
+  //useEffect permite ejecutar el llamado cuando se necesite
+  useEffect(() => {
+    try {
+      fetchData();
+    } catch (error) {
+      console.log(error);
+    }
+  }, []); //El array debe estar vacío cuando no se usa Pagination
 
-        useEffect(() => {
-
-            try {
-                fetchData();
-            } catch (error) {
-                console.log(error);
-            }
-        }, []);
-
-        return data;
+  return data;
 };
 
 export default useFetch;
