@@ -14,12 +14,11 @@ export default function Products() {
   const [products, setProducts] = useState([]);
   const { alert, setAlert, toggleAlert } = useAlert();
 
-
-  useEffect(()=> { 
-        async function getProducts (){
-            const response = await axios.get(endPoints.products.allProducts);
-            setProducts(response.data);
-        }
+  useEffect(() => {
+    async function getProducts() {
+      const response = await axios.get(endPoints.products.allProducts);
+      setProducts(response.data);
+    }
     try {
       getProducts();
     } catch (error) {
@@ -59,7 +58,6 @@ export default function Products() {
         </div>
       </div>
 
-
       <div className="flex flex-col">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -87,7 +85,6 @@ export default function Products() {
                     </th>
                   </tr>
                 </thead>
-                
                 <tbody className="bg-white divide-y divide-gray-200">
                   {products?.map((product) => (
                     <tr key={`Product-item-${product.id}`}>

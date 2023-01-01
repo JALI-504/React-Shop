@@ -18,8 +18,7 @@ export default function FormProduct({ setOpen, setAlert, product }) {
     };
 
     if (product) {
-      updateProduct(product.id, data)
-      .then(() => {
+      updateProduct(product.id, data).then(() => {
         router.push('/dashboard/products/');
       });
     } else {
@@ -80,7 +79,7 @@ export default function FormProduct({ setOpen, setAlert, product }) {
               <select
                 id="category"
                 name="category"
-                defaultValue={product?.categoryId}
+                defaultValue={product?.category}
                 autoComplete="category-name"
                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               >

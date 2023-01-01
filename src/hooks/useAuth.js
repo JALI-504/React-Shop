@@ -3,15 +3,15 @@ import Cookie from 'js-cookie';
 import axios from 'axios';
 import endPoints from '@services/api/';
 
-const AuthContext = createContext();
+const authContext = createContext();
 
 export function ProvideAuth({ children }) {
   const auth = useProvideAuth();
-  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
+  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }
 
 export const useAuth = () => {
-  return useContext(AuthContext);
+  return useContext(authContext);
 };
 
 function useProvideAuth() {
@@ -33,9 +33,6 @@ function useProvideAuth() {
       setUser(user);
     }
   };
-
-
-
 
   const logout = () => {
     Cookie.remove('token');
